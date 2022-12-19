@@ -10,28 +10,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
+    // Declaring variables
     Button button2 ;
     TextView textView2 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Intent intent = getIntent();
-        String text = intent.getStringExtra("text");
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        // find by id
         button2 = findViewById(R.id.button2);
         textView2 = findViewById(R.id.textView2);
-        textView2.setText(text);
 
+        // getIntent -- received data from previous activity .
+        Intent intent = getIntent();
+        // getting data by adding key
+        String text = intent.getStringExtra("text");
+
+        textView2.setText(text);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Intent to share result
                 Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
                 whatsappIntent.setType("text/plain");
-                whatsappIntent.setPackage("com.whatsapp");
                 whatsappIntent.putExtra(Intent.EXTRA_TEXT, text);
                 startActivity(whatsappIntent);
-
 
             }
         });
